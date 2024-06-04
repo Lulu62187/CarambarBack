@@ -1,0 +1,229 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "CarambarBack API",
+      "description": "API for managing jokes (blagues)"
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "Get API root",
+          "description": "Returns a success message",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/test": {
+        "get": {
+          "summary": "Test route",
+          "description": "Returns a test message",
+          "responses": {
+            "200": {
+              "description": "Test response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/random": {
+        "get": {
+          "summary": "Get a random joke",
+          "description": "Returns a random joke from the database",
+          "responses": {
+            "200": {
+              "description": "Random joke response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "carambarback": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "blague": {
+                        "type": "string"
+                      },
+                      "reponse": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Blagues": {
+        "get": {
+          "summary": "Get all jokes",
+          "description": "Returns all jokes from the database",
+          "responses": {
+            "200": {
+              "description": "All jokes response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Blagues": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "blague": {
+                          "type": "string"
+                        },
+                        "reponse": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new joke",
+          "description": "Creates a new joke in the database",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "blague": {
+                    "type": "string"
+                  },
+                  "reponse": {
+                    "type": "string"
+                  }
+                },
+                "required": ["blague", "reponse"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Joke created",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "blague": {
+                        "type": "string"
+                      },
+                      "reponse": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Blagues/{id}": {
+        "get": {
+          "summary": "Get a joke by ID",
+          "description": "Returns a single joke by ID from the database",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Joke response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Blague": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "blague": {
+                        "type": "string"
+                      },
+                      "reponse": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Joke not found",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Blague": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "blague": {
+            "type": "string"
+          },
+          "reponse": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+  
